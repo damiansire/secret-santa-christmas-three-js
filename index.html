@@ -8,6 +8,7 @@
   </head>
   <body>
     <script src="./scripts/three.js"></script>
+    <script src="./scripts/camera.js"></script>
     <script>
       //Creacion de la escena y de la camara
       const scene = new THREE.Scene();
@@ -23,18 +24,13 @@
       document.body.appendChild(renderer.domElement);
 
       const cube = drawSquare(5, 0, 0);
-      const cube2 = drawSquare(0, 0, 0);
+      const cube2 = drawSquare(1, 0, 0);
       //Agregamos una linea grid de ayuda
-      const grid = new THREE.GridHelper(100, 100);
+      const grid = new THREE.GridHelper(105, 105);
       scene.add(grid);
 
       //Lo posicionamos en la escena
-      camera.position.z = 4;
-      camera.position.y = 1;
-      camera.position.x = 2;
-      camera.rotation.x = 0;
-      camera.rotation.z = 0;
-      camera.rotation.y = 0;
+      ponerCamaraDeArriba(camera);
 
       function drawSquare(x, y, z) {
         //Creo una geometria con una primitiva xD
@@ -62,8 +58,8 @@
       }
 
       function render() {
-        cube.animateCube();
-        cube2.animateCube();
+        //cube.animateCube();
+        //cube2.animateCube();
         requestAnimationFrame(render);
         renderer.render(scene, camera);
       }
