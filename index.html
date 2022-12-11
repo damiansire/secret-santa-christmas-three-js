@@ -15,6 +15,10 @@
       const camera = new THREE.PerspectiveCamera(80, perspectiveRatio, 0.1, 1000);
       //Renderizado
       const renderer = new THREE.WebGLRenderer();
+      //La dimencion del render es toda la pantalla
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      //Agregamos al documento el renderer para que se renderize
+      document.body.appendChild(renderer.domElement);
     </script>
   </body>
 </html>
