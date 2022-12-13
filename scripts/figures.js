@@ -1,3 +1,5 @@
+const squaresAmountInLine = 10;
+const lastSquare = { z: (squaresAmountInLine - 1) * -2 };
 function drawSquare(x, y, z) {
   //Creo una geometria con una primitiva xD
   const geometry = new THREE.BoxGeometry();
@@ -16,9 +18,27 @@ function drawSquare(x, y, z) {
   scene.add(cube);
 
   function animate() {
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+    //cube.position.x -= 0.005;
+    cube.position.z += 0.01;
   }
 
   return { mesh: cube, animateElement: animate };
 }
+
+const drawSquares = () => {
+  const squares = [];
+  for (let index = -1; index < squaresAmountInLine; index++) {
+    squares.push(drawSquare(5, 0, -2 * index));
+    squares.push(drawSquare(-1, 0, -2 * index));
+  }
+  return squares;
+};
+
+animateSquares = (squares) => {
+  for (square of squares) {
+    if (square.mesh.position.z > 3) {
+      square.mesh.position.z = lastSquare.z;
+    }
+    square.animateElement();
+  }
+};

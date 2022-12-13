@@ -1,3 +1,20 @@
+/*
+  drawAxis();
+  function drawLine(x1, y1, z1, x2, y2, z2) {
+    const material = new THREE.LineBasicMaterial({ color: "red" });
+    const points = [];
+    points.push(new THREE.Vector3(x1, y1, z1));
+    points.push(new THREE.Vector3(x2, y2, z2));
+
+    const geometry = new THREE.BufferGeometry().setFromPoints(points);
+    const line = new THREE.Line(geometry, material);
+    scene.add(line);
+  }
+  function drawAxis() {
+    drawLine(0, 3, 0, 1, 3, 0);
+  }
+*/
+
 function ponerCamaraDeFrente(camera) {
   camera.position.z = 4;
   camera.position.y = 1;
