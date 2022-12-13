@@ -8,9 +8,11 @@
   </head>
   <body>
     <script src="./scripts/three.js"></script>
+    <script src="./loaders/GLTFLoader.js"></script>
+    <script src="./loaders/DRACOLoader.js"></script>
     <script src="./scripts/camera.js"></script>
     <script src="./scripts/figures.js"></script>
-    <div id="info">Description</div>
+    <script src="./scripts/background.js"></script>
     <style>
       body {
         position: relative;
@@ -29,9 +31,33 @@
       //ponerCamaraDeArriba(camera);
       ponerCamaraDeFrente(camera);
 
+      const loader = new THREE.GLTFLoader();
+      const dracoLoader = new THREE.DRACOLoader();
+      dracoLoader.setDecoderPath("/models/model.gltf");
+      loader.setDRACOLoader(dracoLoader);
+      // Load a glTF resource
+      loader.load(
+        // resource URL
+        "/models/model.gltf",
+        // called when the resource is loaded
+        function (gltf) {
+          scene.add(gltf.scene);
+          gltf.animations; // Array<THREE.AnimationClip>
+          gltf.scene; // THREE.Group
+          gltf.scenes; // Array<THREE.Group>
+          gltf.cameras; // Array<THREE.Camera>
+          gltf.asset; // Object
+        },
+        // called while loading is progressing
+        function (xhr) {
+          console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+        },
+        // called when loading has errors
+        function (error) {
+          console.log(error);
+        }
+      );
       function render() {
-        //cube.animateElement();
-        //cube2.animateElement();
         animateSquares(squares);
         requestAnimationFrame(render);
         renderer.render(scene, camera);
